@@ -231,7 +231,7 @@ export default function Products() {
           textAlign: "right",
         }}
       >
-        <Button submit primary onClick={handleSync}>
+        <Button submit  onClick={handleSync} variant="primary">
           Sync Products
         </Button>
       </div>
@@ -239,7 +239,7 @@ export default function Products() {
       <div>
         <Form method="post" encType="multipart/form-data">
           <input type="file" id="my-file" name="file" />
-          <Button submit primary>
+          <Button submit  variant="primary">
             Sync Products
           </Button>
         </Form>
