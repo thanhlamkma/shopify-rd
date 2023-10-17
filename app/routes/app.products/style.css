@@ -1,0 +1,18 @@
+.input-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.input-container input {
+  height: 30px;
+  border-radius: 6px;
+  width: 100px;
+  text-align: center;
+  outline: none;
+  border: none;
+}
+
+.input-container input:focus {
+  border: 1px solid gray;
+}
