@@ -8,9 +8,11 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 import rootCss from "./styles/index.css";
+import tailwindCss from "./styles/tailwind.css";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: rootCss },
+  { rel: "stylesheet", href: tailwindCss },
 ];
 
 export default function App() {

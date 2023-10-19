@@ -28,7 +28,7 @@ import {
   useSetIndexFiltersMode,
 } from "@shopify/polaris";
 import { ImageMajor } from "@shopify/polaris-icons";
-import type { Status } from "@shopify/polaris/build/ts/src/components/Badge";
+import type { Tone } from "@shopify/polaris/build/ts/src/components/Badge";
 import { useCallback, useEffect, useState } from "react";
 import { authenticate } from "~/shopify.server";
 import { fakeProductsData } from "../app.syncProducts/data";
@@ -396,7 +396,7 @@ export default function Products() {
                   </IndexTable.Cell>
 
                   <IndexTable.Cell>
-                    <Badge status={getStatus(status).color as Status}>
+                    <Badge tone={getStatus(status).color as Tone}>
                       {getStatus(status).text}
                     </Badge>
                   </IndexTable.Cell>

@@ -2,7 +2,7 @@
 
 name = "test-ecom"
 client_id = "fe263143b9358d60b6a7c8f90b0b071e"
-application_url = "https://joshua-potatoes-parenting-employers.trycloudflare.com"
+application_url = "https://lyric-cab-testimonials-arg.trycloudflare.com"
 embedded = true
 
 [access_scopes]
@@ -11,9 +11,9 @@ scopes = "write_products, read_product_listings, write_shipping"
 
 [auth]
 redirect_urls = [
-  "https://joshua-potatoes-parenting-employers.trycloudflare.com/auth/callback",
-  "https://joshua-potatoes-parenting-employers.trycloudflare.com/auth/shopify/callback",
-  "https://joshua-potatoes-parenting-employers.trycloudflare.com/api/auth/callback"
+  "https://lyric-cab-testimonials-arg.trycloudflare.com/auth/callback",
+  "https://lyric-cab-testimonials-arg.trycloudflare.com/auth/shopify/callback",
+  "https://lyric-cab-testimonials-arg.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]

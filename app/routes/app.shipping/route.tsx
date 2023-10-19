@@ -31,13 +31,89 @@ export const action = async ({ request }: ActionArgs) => {
   const { admin } = await authenticate.admin(request);
 
   const formData = await request.formData();
+  const carrierId = await formData.get("carrierId");
 
   if (request.method === "POST") {
     const response = await handleCreateRequest(admin, request);
 
-    return response;
+    // try {
+    //   const response = await fetch(
+    //     "https://lyric-cab-testimonials-arg.trycloudflare.com/api/shipping",
+    //     {
+    //       headers: {
+    //         "X-Shopify-Access-Token": session.accessToken ?? "",
+    //         "Content-Type": "application/json",
+    //       },
+    //       method: "POST",
+    //       body: JSON.stringify({
+    //         rate: {
+    //           origin: {
+    //             country: "CA",
+    //             postal_code: "K2P1L4",
+    //             province: "ON",
+    //             city: "Ottawa",
+    //             name: null,
+    //             address1: "150 Elgin St.",
+    //             address2: "",
+    //             address3: null,
+    //             phone: null,
+    //             fax: null,
+    //             email: null,
+    //             address_type: null,
+    //             company_name: "Jamie D's Emporium",
+    //           },
+    //           destination: {
+    //             country: "CA",
+    //             postal_code: "K1M1M4",
+    //             province: "ON",
+    //             city: "Ottawa",
+    //             name: "Bob Norman",
+    //             address1: "24 Sussex Dr.",
+    //             address2: "",
+    //             address3: null,
+    //             phone: null,
+    //             fax: null,
+    //             email: null,
+    //             address_type: null,
+    //             company_name: null,
+    //           },
+    //           items: [
+    //             {
+    //               name: "Short Sleeve T-Shirt",
+    //               sku: "",
+    //               quantity: 1,
+    //               grams: 1000,
+    //               price: 1999,
+    //               vendor: "Jamie D's Emporium",
+    //               requires_shipping: true,
+    //               taxable: true,
+    //               fulfillment_service: "manual",
+    //               properties: null,
+    //               product_id: 48447225880,
+    //               variant_id: 258644705304,
+    //             },
+    //           ],
+    //           currency: "USD",
+    //           locale: "en",
+    //         },
+    //       }),
+    //     }
+    //   );
+
+    //   const responseJson = await response.json();
+
+    //   console.log("responseJson", responseJson);
+
+    //   return null;
+    // } catch (error) {
+    //   console.log("Error call API", error);
+    //   return new Response("Failed to call API");
+    // }
+
+    const responseJson = await response.json();
+
+    return responseJson;
   } else if (request.method === "PUT") {
-    const carrierId = await formData.get("carrierId");
     const response = await handleUpdateRequest(
       admin,
       carrierId?.toString() ?? "",
@@ -46,7 +122,6 @@ export const action = async ({ request }: ActionArgs) => {
 
     return response;
   } else {
-    const carrierId = await formData.get("carrierId");
     const response = await handleDeleteRequest(
       admin,
       carrierId?.toString() ?? ""
@@ -64,7 +139,7 @@ const handleCreateRequest = async (admin: AdminApiContext, data: any) => {
         carrier_service: {
           name: "Shipping Rate Provider",
           callback_url:
-            "https://smart-phone-vn.myshopify.com/admin/apps/test-ecom-4/api/shipping",
+            "https://lyric-cab-testimonials-arg.trycloudflare.com/api/shipping",
           service_discovery: true,
         },
       },
@@ -100,7 +175,7 @@ const handleUpdateRequest = async (
           id: carrierId,
           name: "Shipping Rate Provider",
           callback_url:
-            "https://smart-phone-vn.myshopify.com/admin/apps/test-ecom-4/api/shipping",
+            "https://lyric-cab-testimonials-arg.trycloudflare.com/api/shipping",
           service_discovery: true,
         },
       },
@@ -160,17 +235,13 @@ export default function Shipping() {
   const handleCreateCarrier = () =>
     submit({}, { method: "POST", replace: true });
 
-  const handleUpdateCarrier = () =>
-    submit(
-      { carrierId: shippingData[0]?.id },
-      { method: "PUT", replace: true }
-    );
+  const handleUpdateCarrier = (carrierId: number) =>
+    submit({ carrierId: carrierId }, { method: "PUT", replace: true });
 
-  const handleDeleteCarrier = () =>
-    submit(
-      { carrierId: shippingData[0]?.id },
-      { method: "DELETE", replace: true }
-    );
+  const handleDeleteCarrier = (carrierId: number) =>
+    submit({ carrierId: carrierId }, { method: "DELETE", replace: true });
+
+  // const handleCallAPI = () => submit({}, { method: "POST", replace: true });
 
   useEffect(() => {
     console.log("shipping", shipping);
@@ -217,7 +288,7 @@ export default function Shipping() {
               <IndexTable.Cell>{name ?? ""}</IndexTable.Cell>
 
               <IndexTable.Cell>
-                <Badge status={active ? "success" : "critical"}>
+                <Badge tone={active ? "success" : "critical"}>
                   {active ? "Hoạt động" : "Khóa"}
                 </Badge>
               </IndexTable.Cell>
@@ -228,15 +299,15 @@ export default function Shipping() {
                 >
                   <Button
                     variant="primary"
-                    onClick={() => handleDeleteCarrier()}
+                    onClick={() => handleUpdateCarrier(id)}
                   >
-                    Xóa
+                    Cập nhật
                   </Button>
 
                   <Button
                     variant="primary"
                     tone="critical"
-                    onClick={() => handleDeleteCarrier()}
+                    onClick={() => handleDeleteCarrier(id)}
                   >
                     Xóa
                   </Button>

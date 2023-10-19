@@ -1,11 +1,5 @@
 {
-  "include": [
-    "remix.env.d.ts",
-    "tailwind.config.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "app/root.tsx"
-  ],
+  "include": ["remix.env.d.ts", "**/*.ts", "**/*.tsx", "app/root.tsx"],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2022"],
     "isolatedModules": true,

@@ -1,19 +1,19 @@
-import { useEffect } from "react";
 import { json } from "@remix-run/node";
 import { useActionData, useNavigation, useSubmit } from "@remix-run/react";
 import {
-  Page,
-  Layout,
-  Text,
-  VerticalStack,
-  Card,
-  Button,
-  HorizontalStack,
+  BlockStack,
   Box,
+  Button,
+  Card,
   Divider,
-  List,
+  InlineGrid,
+  Layout,
   Link,
+  List,
+  Page,
+  Text,
 } from "@shopify/polaris";
+import { useEffect } from "react";
 
 import { authenticate } from "../shopify.server";
 
@@ -96,12 +96,12 @@ export default function Index() {
           Generate a product
         </button>
       </ui-title-bar>
-      <VerticalStack gap="5">
+      <BlockStack gap="5">
         <Layout>
           <Layout.Section>
             <Card>
-              <VerticalStack gap="5">
-                <VerticalStack gap="2">
+              <BlockStack gap="500">
+                <BlockStack gap="200">
                   <Text as="h2" variant="headingMd">
                     Congrats on creating a new Shopify app 🎉
                   </Text>
@@ -127,8 +127,8 @@ export default function Index() {
                     mutation demo, to provide a starting point for app
                     development.
                   </Text>
-                </VerticalStack>
-                <VerticalStack gap="2">
+                </BlockStack>
+                <BlockStack gap="200">
                   <Text as="h3" variant="headingMd">
                     Get started with products
                   </Text>
@@ -143,8 +143,8 @@ export default function Index() {
                     </Link>{" "}
                     mutation in our API references.
                   </Text>
-                </VerticalStack>
-                <HorizontalStack gap="3" align="end">
+                </BlockStack>
+                <InlineGrid gap="300" alignItems="end">
                   {actionData?.product && (
                     <Button
                       url={`shopify:admin/products/${productId}`}
@@ -153,10 +153,14 @@ export default function Index() {
                       View product
                     </Button>
                   )}
-                  <Button loading={isLoading} primary onClick={generateProduct}>
+                  <Button
+                    loading={isLoading}
+                    variant="primary"
+                    onClick={generateProduct}
+                  >
                     Generate a product
                   </Button>
-                </HorizontalStack>
+                </InlineGrid>
                 {actionData?.product && (
                   <Box
                     padding="4"
@@ -171,37 +175,38 @@ export default function Index() {
                     </pre>
                   </Box>
                 )}
-              </VerticalStack>
+              </BlockStack>
             </Card>
           </Layout.Section>
-          <Layout.Section secondary>
-            <VerticalStack gap="5">
+
+          <Layout.Section variant="oneThird">
+            <BlockStack gap="500">
               <Card>
-                <VerticalStack gap="2">
+                <BlockStack gap="200">
                   <Text as="h2" variant="headingMd">
                     App template specs
                   </Text>
-                  <VerticalStack gap="2">
+                  <BlockStack gap="200">
                     <Divider />
-                    <HorizontalStack align="space-between">
+                    <InlineGrid align="space-between">
                       <Text as="span" variant="bodyMd">
                         Framework
                       </Text>
                       <Link url="https://remix.run" target="_blank">
                         Remix
                       </Link>
-                    </HorizontalStack>
+                    </InlineGrid>
                     <Divider />
-                    <HorizontalStack align="space-between">
+                    <InlineGrid align="space-between">
                       <Text as="span" variant="bodyMd">
                         Database
                       </Text>
                       <Link url="https://www.prisma.io/" target="_blank">
                         Prisma
                       </Link>
-                    </HorizontalStack>
+                    </InlineGrid>
                     <Divider />
-                    <HorizontalStack align="space-between">
+                    <InlineGrid align="space-between">
                       <Text as="span" variant="bodyMd">
                         Interface
                       </Text>
@@ -217,9 +222,9 @@ export default function Index() {
                           App Bridge
                         </Link>
                       </span>
-                    </HorizontalStack>
+                    </InlineGrid>
                     <Divider />
-                    <HorizontalStack align="space-between">
+                    <InlineGrid align="space-between">
                       <Text as="span" variant="bodyMd">
                         API
                       </Text>
@@ -229,12 +234,12 @@ export default function Index() {
                       >
                         GraphQL API
                       </Link>
-                    </HorizontalStack>
-                  </VerticalStack>
-                </VerticalStack>
+                    </InlineGrid>
+                  </BlockStack>
+                </BlockStack>
               </Card>
               <Card>
-                <VerticalStack gap="2">
+                <BlockStack gap="200">
                   <Text as="h2" variant="headingMd">
                     Next steps
                   </Text>
@@ -260,12 +265,12 @@ export default function Index() {
                       </Link>
                     </List.Item>
                   </List>
-                </VerticalStack>
+                </BlockStack>
               </Card>
-            </VerticalStack>
+            </BlockStack>
           </Layout.Section>
         </Layout>
-      </VerticalStack>
+      </BlockStack>
     </Page>
   );
 }

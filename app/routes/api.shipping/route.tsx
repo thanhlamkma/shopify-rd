@@ -7,6 +7,8 @@ import type {
 } from "./models";
 
 export const action = async ({ request }: ActionArgs) => {
+  console.log("request", request);
+
   // Parse the request data
   const { destination, items } = JSON.parse(await request.text());
 
@@ -25,17 +27,13 @@ export const action = async ({ request }: ActionArgs) => {
   };
 
   // Respond with the API response
-  return json(response, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  return json(response);
 };
 
 // Calculate shipping rates based on your business logic
 function calculateShippingRates(
-  destination: ShippingRateDestination,
-  items: ShippingRateItem[]
+  destination?: ShippingRateDestination,
+  items?: ShippingRateItem[]
 ) {
   // Your logic here to calculate shipping rates
   // Return an array of shipping rate objects with service name, service code, total price, description and currency
@@ -44,14 +42,14 @@ function calculateShippingRates(
       serviceName: "Giao hàng tiết kiệm",
       serviceCode: "STANDARD",
       description: "Giao trong 5 ngày",
-      totalPrice: 10000,
+      totalPrice: 1000000,
       currency: "VND",
     },
     {
       serviceName: "Giao hàng nhanh",
       serviceCode: "EXPRESS",
       description: "Giao trong 2 ngày",
-      totalPrice: 20000,
+      totalPrice: 2000000,
       currency: "VND",
     },
   ];
