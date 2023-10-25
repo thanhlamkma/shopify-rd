@@ -138,8 +138,7 @@ const handleCreateRequest = async (admin: AdminApiContext, data: any) => {
       data: {
         carrier_service: {
           name: "Shipping Rate Provider",
-          callback_url:
-            "https://lyric-cab-testimonials-arg.trycloudflare.com/api/shipping",
+          callback_url: `${process.env.SHOPIFY_APP_URL}/api/shipping`,
           service_discovery: true,
         },
       },
@@ -174,8 +173,7 @@ const handleUpdateRequest = async (
         carrier_service: {
           id: carrierId,
           name: "Shipping Rate Provider",
-          callback_url:
-            "https://lyric-cab-testimonials-arg.trycloudflare.com/api/shipping",
+          callback_url: `${process.env.SHOPIFY_APP_URL}/api/shipping`,
           service_discovery: true,
         },
       },
